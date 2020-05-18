@@ -1,4 +1,4 @@
-version: "3"
+version: "3.8"
 services:
   web:
     build: .
@@ -11,6 +11,7 @@ services:
       - .:/usr/src/app
     depends_on:
     - mongo
+
   mongo:
     image: mongo
     container_name: mongodb
