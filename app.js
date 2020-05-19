@@ -12,7 +12,13 @@ const DB_HOST = process.env.DB_HOST || 'mongo:27017';
 const SERVER_PORT = 4200;
 
 
+
+
+// use this db connection for docker and k8s
 mongoose.connect(`mongodb://${DB_HOST}/${DB_NAME}`);
+
+// use this on local 
+mongoose.connect(`mongodb://localhost/${DB_NAME}`);
 
 const app = express();
 
