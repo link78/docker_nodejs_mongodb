@@ -2,6 +2,7 @@ version: "3"
 services:
   web:
     build: .
+    container_name: web_front
     ports: 
       - "7800:4200"
     links:

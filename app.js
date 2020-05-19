@@ -18,7 +18,7 @@ const SERVER_PORT = 4200;
 mongoose.connect(`mongodb://${DB_HOST}/${DB_NAME}`);
 
 // use this on local 
-mongoose.connect(`mongodb://localhost/${DB_NAME}`);
+//mongoose.connect(`mongodb://localhost/${DB_NAME}`);
 
 const app = express();
 
