@@ -9,7 +9,7 @@ const mongoose = require('mongoose')
 const DB_NAME = 'product';
 const DB_HOST = process.env.DB_HOST || 'mongo:27017';
 
-const SERVER_PORT = 4200;
+const SERVER_PORT = 8080;
 
 
 
