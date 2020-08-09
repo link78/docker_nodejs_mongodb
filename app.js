@@ -15,10 +15,10 @@ const SERVER_PORT = 4200;
 
 
 // use this db connection for docker and k8s
-mongoose.connect(`mongodb://${DB_HOST}/${DB_NAME}`);
+mongoose.connect(`mongodb://${DB_HOST}/${DB_NAME}`, {useNewUrlParser: true});
 
 // use this on local 
-//mongoose.connect(`mongodb://localhost/${DB_NAME}`);
+//mongoose.connect(`mongodb://localhost/${DB_NAME}`, {useNewUrlParser: true});
 
 const app = express();
 
