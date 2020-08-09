@@ -4,7 +4,7 @@ services:
     build: .
     container_name: web_front
     ports: 
-      - "7800:4200"
+      - "8080:8080"
     links:
       - mongo
     volumes:
@@ -16,4 +16,4 @@ services:
     image: mongo
     container_name: mongodb
     ports:
-      - "28017:27017"
+      - "27017:27017"
