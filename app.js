@@ -3,22 +3,40 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+const chalk = require('chalk');
+const config = require('./config/config');
 
 const mongoose = require('mongoose')
+mongoose.Promise = global.Promise;
+
+const env = require('./env/environment');
+
+const mongoUri = `mongodb://${env.cosmosdbName}:${env.key}@${env.cosmosdbName}.documents.azure.com:${env.port}/${env.db}?ssl=true&sslverifycertificate=false`;
+
+const SERVER_PORT = 80;
+
+
+
 
 const DB_NAME = 'product';
-const DB_HOST = process.env.DB_HOST || 'mongo:27017';
-
-const SERVER_PORT = 8080;
-
-
-
+const DB_HOST = process.env.MONGODB_CONNECTION || 'mongo:27017';
 
 // use this db connection for docker and k8s
-mongoose.connect(`mongodb://${DB_HOST}/${DB_NAME}`, {useNewUrlParser: true});
+//const mongoUri = `mongodb://${DB_HOST}/${DB_NAME}`;
 
 // use this on local 
-//mongoose.connect(`mongodb://localhost/${DB_NAME}`, {useNewUrlParser: true});
+// const mongoUri = `mongodb://localhost:127.0.0.1/${DB_NAME}`;
+
+mongoose.connect(mongoUri, {useNewUrlParser: true, useUnifiedTopology: true}, function (err){
+  if (err){
+    console.error(chalk.red('Could not connect to MongoDB'));
+    console.log(chalk.red(err));
+    mongoose.connection.close();
+    process.exit(-1);
+  } else {
+    console.log('Connected to MongoDB');
+  }
+});    
 
 const app = express();
 
