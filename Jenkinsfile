@@ -8,6 +8,8 @@ pipeline {
           sh "node --version"
           sh 'apk update && apk add docker'
           sh 'docker --version'
+          sh 'sudo usermod -aG docker jenkins'
+          sh 'sudo usermod -aG docker $USER'
           
         }
       }
