@@ -13,7 +13,7 @@ const env = require('./env/environment');
 
 //const mongoUri = `mongodb://${env.cosmosdbName}:${env.key}@${env.cosmosdbName}.documents.azure.com:${env.port}/${env.db}?ssl=true&sslverifycertificate=false`;
 const mongoUri ="mongodb+srv://kade:Marine7815@cluster0-p6xiv.mongodb.net/employees?retryWrites=true&w=majority";
-const SERVER_PORT = 8080;
+const SERVER_PORT = 9080;
 
 
 
