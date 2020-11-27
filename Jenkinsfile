@@ -10,16 +10,36 @@ pipeline {
             sh "docker build -t $DOCKER_ID/emplweb ."              
      }
     }
-    stage('pushing image'){
+    stage('Deploy to dev') {
+            steps {
+               sh 'docker run --name web-dev -d -p 4541:8080 $DOCKER_ID/emplweb'
+            }
+        }
+        stage('Deploy to qa') {
+            steps {
+               sh 'docker run --name web-qa -d -p 4540:8080 $DOCKER_ID/emplweb'
+            }
+        }
+        stage('Approve to prod') {
+            steps {
+              timeout(time:1, unit:'DAYS') {
+		         input('Do you want to deploy to live?')
+	     }
+      }
+        }
+    
+     stage('Remove old build image'){
         steps{
-            
-        
-             sh "docker run --name web -d -p 4545:8080 $DOCKER_ID/emplweb"
-        
+           
+            sh "docker rm -f web"
+                        
      }
     }
-    
-    
-   
-  }
+        stage('Deploy container to production') {
+            steps {
+                sh 'docker run --name web -d -p 4545:8080 $DOCKER_ID/empweb'
+                sh 'docker ps'
+            }
+        }
+    }
 }
