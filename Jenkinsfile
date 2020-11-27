@@ -10,6 +10,16 @@ pipeline {
             sh "docker build -t $DOCKER_ID/emplweb ."              
      }
     }
+	  
+    stage('Remove old build image'){
+        steps{
+           
+            sh "docker rm -f web-qa"
+	    sh "docker rm -f web-dev"
+	    sh "docker rm -f web"
+                        
+     }
+    }
     stage('Deploy to dev') {
             steps {
                sh 'docker run --name web-dev -d -p 4541:8080 $DOCKER_ID/emplweb'
@@ -28,15 +38,7 @@ pipeline {
       }
         }
     
-     stage('Remove old build image'){
-        steps{
-           
-            sh "docker rm -f web-qa"
-	    sh "docker rm -f web-dev"
-	    sh "docker rm -f web"
-                        
-     }
-    }
+     
         stage('Deploy container to production') {
             steps {
                 sh 'docker run --name web -d -p 4545:8080 $DOCKER_ID/emplweb'
