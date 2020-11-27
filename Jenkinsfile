@@ -37,7 +37,7 @@ pipeline {
     }
         stage('Deploy container to production') {
             steps {
-                sh 'docker run --name web -d -p 4545:8080 $DOCKER_ID/empweb'
+                sh 'docker run --name web -d -p 4545:8080 $DOCKER_ID/emplweb'
                 sh 'docker ps'
             }
         }
