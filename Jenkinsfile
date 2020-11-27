@@ -31,7 +31,9 @@ pipeline {
      stage('Remove old build image'){
         steps{
            
-            sh "docker rm -f web"
+            sh "docker rm -f web-qa"
+	    sh "docker rm -f web-dev"
+	    sh "docker rm -f web"
                         
      }
     }
