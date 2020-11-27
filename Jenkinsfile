@@ -13,7 +13,7 @@ pipeline {
     stage('pushing image'){
         steps{
             
-         //   sh "docker push $ACR_LOGIN/emplweb"
+        
              sh "docker run --name web -d -p 4545:8080 $DOCKER_ID/emplweb"
         
      }
