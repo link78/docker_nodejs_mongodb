@@ -11,7 +11,14 @@ pipeline {
      }
     }
 	  
-    
+    stage('Deploy to dev') {
+            steps {
+               sh 'docker rm -f web-dev'
+		sh 'docker rm -f web-qa'
+		sh 'docker rm -f web'
+	
+            }
+        }
     stage('Deploy to dev') {
             steps {
                sh 'docker run --name web-dev -d -p 4541:8080 $DOCKER_ID/emplweb'
