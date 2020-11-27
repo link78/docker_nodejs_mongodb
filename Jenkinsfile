@@ -6,7 +6,7 @@ pipeline {
     stage('build image'){
         steps{
            
-            sh "docker login $ACR_LOGIN -u $ACR -p ACR_PASSWORD"
+            sh "docker login $ACR_LOGIN -u $DOCKER_ID -p $Password"
             sh "docker build -t $DOCKER_ID/emplweb ."              
      }
     }
